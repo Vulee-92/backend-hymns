@@ -6,8 +6,8 @@ const createProduct = async (req, res) => {
       name,
       image,
       type,
-      price,
       countInStock,
+      price,
       rating,
       description,
       discount,
@@ -16,15 +16,14 @@ const createProduct = async (req, res) => {
       !name ||
       !image ||
       !type ||
-      !description ||
-      !price ||
       !countInStock ||
+      !price ||
       !rating ||
       !discount
     ) {
       return res.status(200).json({
         status: "ERR",
-        message: " The input is required",
+        message: "The input is required",
       });
     }
     const response = await ProductService.createProduct(req.body);
@@ -54,13 +53,14 @@ const updateProduct = async (req, res) => {
     });
   }
 };
+
 const getDetailsProduct = async (req, res) => {
   try {
     const productId = req.params.id;
     if (!productId) {
       return res.status(200).json({
         status: "ERR",
-        message: "The userId is required",
+        message: "The productId is required",
       });
     }
     const response = await ProductService.getDetailsProduct(productId);
@@ -75,7 +75,6 @@ const getDetailsProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    // const token = req.headers
     if (!productId) {
       return res.status(200).json({
         status: "ERR",
@@ -108,6 +107,7 @@ const deleteMany = async (req, res) => {
     });
   }
 };
+
 const getAllProduct = async (req, res) => {
   try {
     const { limit, page, sort, filter } = req.query;
@@ -127,7 +127,7 @@ const getAllProduct = async (req, res) => {
 
 const getAllType = async (req, res) => {
   try {
-    const response = await ProductService.getAllTtype();
+    const response = await ProductService.getAllType();
     return res.status(200).json(response);
   } catch (e) {
     return res.status(404).json({
