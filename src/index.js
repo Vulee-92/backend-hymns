@@ -31,35 +31,50 @@
 // app.listen(port, () => {
 //   console.log("Server is running in port", +port);
 // });
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const routes = require("./routes");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+// const express = require("express");
+// const dotenv = require("dotenv");
+// const mongoose = require("mongoose");
+// const routes = require("./routes");
+// const cors = require("cors");
+// const bodyParser = require("body-parser");
+// const cookieParser = require("cookie-parser");
 
-dotenv.config();
+// dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 3008;
+// const app = express();
+// const port = process.env.PORT || 3008;
 
-app.use(cors());
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ limit: "50mb" }));
-app.use(bodyParser.json());
-app.use(cookieParser());
+// app.use(cors());
+// app.use(express.json({ limit: "50mb" }));
+// app.use(express.urlencoded({ limit: "50mb" }));
+// app.use(bodyParser.json());
+// app.use(cookieParser());
 
-routes(app);
+// routes(app);
 
-mongoose
-  .connect(`${process.env.MONGO_DB}`)
-  .then(() => {
-    // console.log('Connect Db success!')
-  })
-  .catch((err) => {
-    // console.log(err)
-  });
-app.listen(port, () => {
-  console.log("Server is running in port: ", +port);
+// mongoose
+//   .connect(`${process.env.MONGO_DB}`)
+//   .then(() => {
+//     // console.log('Connect Db success!')
+//   })
+//   .catch((err) => {
+//     // console.log(err)
+//   });
+// app.listen(port, () => {
+//   console.log("Server is running in port: ", +port);
+// });
+// const data = require("./dataUser.json");
+const http = require("http");
+const fs = require("fs");
+
+const data = fs.readFileSync("./dataUser.json", "utf-8");
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "application/json" });
+  res.write(data);
+  res.end();
+});
+
+server.listen(3003, () => {
+  console.log("Server is listening on port 3000");
 });
