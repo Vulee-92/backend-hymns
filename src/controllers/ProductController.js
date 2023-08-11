@@ -124,6 +124,7 @@ const getAllProduct = async (req, res) => {
     });
   }
 };
+
 const getAllType = async (req, res) => {
   try {
     const response = await ProductService.getAllTtype();
